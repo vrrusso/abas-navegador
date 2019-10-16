@@ -14,4 +14,6 @@ boolean lista_inserir(Lista * lista, void * i);
 
 void lista_imprimir(Lista * lista);
 
+boolean lista_realocar_registro(Lista * lista,int nova_pos,char * chave);
+
 #endif

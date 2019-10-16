@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include "lista.h"
 #include "aba.h"
 
@@ -59,7 +60,7 @@ void lista_imprimir(Lista * lista){
 		}
 		return;
 	}
-	printf("lista vazia ou nao inicializada\n");
+	//printf("lista vazia ou nao inicializada\n");
 }
 
 void lista_apagar(Lista ** lista){
@@ -78,4 +79,58 @@ void lista_apagar(Lista ** lista){
 	free(*lista);
 	lista=NULL;
 
+}
+
+
+boolean lista_realocar_registro(Lista * lista,int nova_pos,char * chave){
+	if(!lista_vazia(lista)){
+		if(nova_pos>=1){
+			nova_pos=nova_pos>lista->size?lista->size:nova_pos;
+			int atual=1;
+			//buscar o nó a ser realocado
+			Node * aux=lista->begin;
+			while(aux!=NULL && (strcmp(aba_get_titulo(aux->content),chave)!=0)){
+				aux=aux->next;
+				atual++;	
+			}
+			if(aux!=NULL&&atual!=nova_pos){
+				if(aux->prev!=NULL)
+					aux->prev->next=aux->next;
+				else
+					lista->begin=aux->next;
+				if(aux->next!=NULL)
+					aux->next->prev=aux->prev;
+				else
+					lista->end=aux->prev;
+				Node * p = aux;
+				if(nova_pos>atual){
+					while(atual<nova_pos){
+						atual++;
+						p=p->next;
+					}
+					aux->next=p->next;
+					if(p->next!=NULL)
+						p->next->prev=aux;
+					p->next=aux;
+					aux->prev=p;
+					if(lista->end==p)
+						lista->end=aux;
+				}
+				else{
+					while(atual>nova_pos){
+						atual--;
+						p=p->prev;
+					}
+					aux->prev=p->prev;
+					if(p->prev!=NULL)
+						p->prev->next=aux;
+					p->prev=aux;
+					aux->next=p;
+					if(lista->begin==p)
+						lista->begin=aux;
+				}
+			}
+		}
+	}
+	return FALSE;
 }

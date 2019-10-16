@@ -1,0 +1,5 @@
+Exercício de Algoritmos e Estrutura de Dados - Professor Rudinei
+Abas do Navegador
+Victor Russo - 11218855
+
+Na implementação eu optei por uma lista duplamente encadeada, o principal motivo para tomar decisão foi o fato que mesmo consumindo mais memória, a lista duplamente encadeade permite que eu a percorra nos dois sentidos, assim a operação de mudar as abas de posição se torna mais eficiente, pois basta achar a aba, e percorrer pra frente ou pra tras até a posição desejada.(Obs:mesmo assim a operação será O(n)).

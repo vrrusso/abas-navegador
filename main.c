@@ -6,7 +6,7 @@ int main(void){
 	Aba * aux=aba_criar();
 	char titulo[40],url[512];
 	Lista * lista = lista_criar();
-	int op;
+	int op,nova_pos;
 	scanf("%d",&op);
 	while(op!=4){
 		switch(op){
@@ -15,6 +15,11 @@ int main(void){
 				scanf(" %[^\r\n]",url);
 				aba_set(aux,titulo,url);
 				lista_inserir(lista,aux);
+				break;
+			case 2:
+				scanf(" %[^\r\n]",titulo);
+				scanf("%d",&nova_pos);
+				lista_realocar_registro(lista,nova_pos,titulo);
 				break;
 			case 3:
 				lista_imprimir(lista);
