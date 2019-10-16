@@ -6,7 +6,7 @@ typedef int boolean;
 typedef struct lista_ Lista;
 Lista * lista_criar();
 
-boolean lista_apagar(Lista ** lista);
+void lista_apagar(Lista ** lista);
 
 boolean lista_vazia(Lista * lista);
 
